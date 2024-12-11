@@ -1,5 +1,6 @@
 ﻿async Task Puzzle01()
 {
+    // not the best approach, but it works
     var input = await File.ReadAllLinesAsync("input.txt");
 
     var width = input[0].Length;
