@@ -7,10 +7,10 @@ var xmasCounter = 0;
 
 string xmas = "XMAS";
 
-for(int i = 0; i < height; i++)
+for (int i = 0; i < height; i++)
 {
     // row forward
-    for(int j = 0 ; j < width - xmas.Length; j++)
+    for(int j = 0 ; j <= width - xmas.Length; j++)
     {
         var foundXmas = true;
         var q = 0;
@@ -56,10 +56,10 @@ for(int i = 0; i < height; i++)
     }
 }
 
-for(int i = 0; i < width; i++)
+for (int i = 0; i < width; i++)
 {
     // column forward
-    for (int j = 0; j < height - xmas.Length; j++)
+    for (int j = 0; j <= height - xmas.Length; j++)
     {
         var foundXmas = true;
         var q = 0;
@@ -105,9 +105,9 @@ for(int i = 0; i < width; i++)
     }
 }
 
-for(int i = 0; i < width + height; i++)
+for (int i = 0; i < width + height; i++)
 {
-    for(int j = 0; j < i; j++)
+    for(int j = 0; j <= i; j++)
     {
         if(!ElementExists(j, i - j))
             continue;
@@ -129,6 +129,84 @@ for(int i = 0; i < width + height; i++)
         {
             xmasCounter++;
             j += xmas.Length - 1;
+        }        
+    }
+
+    for(int j = i; j >= 0; j--)
+    {
+        if(!ElementExists(j, i - j))
+            continue;
+
+        var foundXmas = true;
+        var q = 0;
+        do
+        {
+            if (ElementExists(j - q, i - j + q) && GetCharAt(j - q, i - j + q) == xmas[q])
+                q++;
+            else
+            {
+                foundXmas = false;
+                break;
+            }
+        } while (q < xmas.Length);
+
+        if (foundXmas)
+        {
+            xmasCounter++;
+            j -= xmas.Length - 1;
+        }
+    }
+}
+
+for (int i = width - 1; i >= -height; i--)
+{
+    for (int j = 0; j < height; j++)
+    {
+        if (!ElementExists(j, i + j))
+            continue;
+
+        var foundXmas = true;
+        var q = 0;
+        do
+        {
+            if (ElementExists(j + q, i + j + q) && GetCharAt(j + q, i + j + q) == xmas[q])
+                q++;
+            else
+            {
+                foundXmas = false;
+                break;
+            }
+        } while (q < xmas.Length);
+
+        if (foundXmas)
+        {
+            xmasCounter++;
+            j += xmas.Length - 1;
+        }
+    }
+
+    for (int j = height - 1; j >= 0; j--)
+    {
+        if (!ElementExists(j, i + j))
+            continue;
+
+        var foundXmas = true;
+        var q = 0;
+        do
+        {
+            if (ElementExists(j - q, i + j - q) && GetCharAt(j - q, i + j - q) == xmas[q])
+                q++;
+            else
+            {
+                foundXmas = false;
+                break;
+            }
+        } while (q < xmas.Length);
+
+        if (foundXmas)
+        {
+            xmasCounter++;
+            j -= xmas.Length - 1;
         }
     }
 }
