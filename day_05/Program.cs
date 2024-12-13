@@ -43,14 +43,14 @@ async Task Puzzle01()
     Console.WriteLine(middlesSum);
 }
 
-async Task Puzzle01()
+async Task Puzzle02()
 {
     var input = (await File.ReadAllTextAsync("input.txt")).Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
-    var rules = input[0].Split("\n", StringSplitOptions.RemoveEmptyEntries);
+    var rulesStrings = input[0].Split("\n", StringSplitOptions.RemoveEmptyEntries);
     var pages = input[1].Split("\n", StringSplitOptions.RemoveEmptyEntries);
     
     var bannedNumbers = new Dictionary<int, List<int>>();
-    foreach (var rule in rules)
+    foreach (var rule in rulesStrings)
     {
         var parts = rule.Split("|", StringSplitOptions.RemoveEmptyEntries);
         if(bannedNumbers.ContainsKey(int.Parse(parts[1])))
@@ -58,6 +58,8 @@ async Task Puzzle01()
         else
             bannedNumbers.Add(int.Parse(parts[1]), new List<int> { int.Parse(parts[0]) });
     }
+    
+    var rules = rulesStrings.Select(r => r.Split("|", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList()).ToList();
 
     var middlesSum = 0;
     foreach (var page in pages)
@@ -101,6 +103,8 @@ async Task Puzzle01()
                     }
                 }
             }while(!isFixed);
+
+            middlesSum += pageNumbers[(pageNumbers.Count - 1) / 2];
         }
     }
 
