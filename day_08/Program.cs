@@ -1,7 +1,7 @@
 ﻿Console.WriteLine("Puzzle 01 result:");
 Console.WriteLine(await Puzzle01());
 
-Console.WriteLine("Puzzle 01 result:");
+Console.WriteLine("Puzzle 02 result:");
 Console.WriteLine(await Puzzle02());
 
 async Task<long> Puzzle01()
